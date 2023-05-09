@@ -84,7 +84,7 @@ function Start() {
   textFont("Georgia");
   fill(0, 150, 0);
   strokeWeight(1);
-  text("Spil: " + spil, width / 2, height / 2);
+  text("Vælg hvilket spil du helst vil spille", width / 2, height / 2);
 }
 function skiftSpil_Pong() {
   skjulKnapper();
@@ -94,60 +94,60 @@ function skiftSpil_Pong() {
 function skiftSpil_Snake() {
   skjulKnapper();
   slange = new Slange();
-  frameRate(width / Skalering / 2);
+  //frameRate(width / Skalering / 2);
   pickLocation();
   spil = 2;
 }
 
 function paddleMove() {
-  //Left moveset
+  //Venstre paddel bevægelse
   if (keyIsDown(87) && spil === 1) {
     Ly -= 7;
   } else if (keyIsDown(83) && spil === 1) {
     Ly += 7;
   }
 
-  //Right moveset
+  //Højre paddel bevægelse
   if (keyIsDown(38) && spil === 1) {
     Ry -= 7;
   } else if (keyIsDown(40) && spil === 1) {
     Ry += 7;
   }
-  //Stop left paddle at top
+  //Stop venstre paddel ved toppen
   if (Ly < 0) {
     Ly = 0;
   }
-  //Stop left paddle at bottom
+  //Stop venstre paddle ved bunden
   else if (Ly > 400 - 70) {
     Ly = 400 - 70;
   }
 
-  //Stop right paddle at top
+  //Stop højre paddel ved toppen
   if (Ry < 0) {
     Ry = 0;
   }
-  //Stop right paddle at bottom
+  //Stop højre paddle ved bunden
   else if (Ry > 400 - 70) {
     Ry = 400 - 70;
   }
 }
 
 function ballMove() {
-  //Ball movement
+  //Bold bevægelse
   Ballx += Balla;
   Bally += Ballb;
 
-  //Bottom collision
+  //Kollision med bunden
   if (Bally > 400 - 10) {
     Ballb = -Ballb;
     WallSound.play();
   }
-  //Top collision
+  //Kollsion med toppen
   if (Bally < 10) {
     Ballb = -Ballb;
     WallSound.play();
   }
-  //Right wall collision + score
+  //Højre mål kollision + score
   if (Ballx > 700) {
     Ballx = 345;
     Bally = 200;
@@ -156,7 +156,7 @@ function ballMove() {
     ScoreSound.play();
     Balla = 4;
   }
-  //Left wall collision + score
+  //Venstre mål kollision + score
   if (Ballx < 0) {
     Ballx = 345;
     Bally = 200;
@@ -166,14 +166,14 @@ function ballMove() {
     Balla = 4;
   }
 
-  //Ball collision with left paddle
+  //Kollision mellem bold og venstre paddel
   if (Ballx < 25) {
     if (Bally > Ly && Bally < Ly + 70) {
       Balla = -Balla + 1;
       PaddleSound.play();
     }
   }
-  //Ball collision with right paddle
+  //Kollision mellem bold og højre paddel
   if (Ballx > 675 - 10)
     if (Bally > Ry && Bally < Ry + 70) {
       Balla = -Balla - 1;
@@ -193,29 +193,29 @@ function Pong() {
 
   background(52);
 
-  //Left paddle
+  //Venstre paddle
   stroke(195, 195, 195);
   fill(195, 195, 195);
   rect(10, Ly, 10, 70);
 
-  //Right paddle
+  //Højre paddle
   rect(680, Ry, 10, 70);
 
-  //Ball
+  //Bold
   rect(Ballx, Bally, 10, 10);
 
-  //Score display
+  //Score visning
   textFont(Font);
   textSize(100);
   text(p1Score, width / 4 - 30, 100);
   text(p2Score, (width / 4) * 3, 100);
 
-  //Middle line
+  //Linje i midten
   strokeWeight(4);
   stroke(195, 195, 195);
   line(width / 2, 0, width / 2, height);
 
-  //Reset game
+  //Reset spil
   if (keyIsDown(82)) {
     p1Score = 0;
     p2Score = 0;
