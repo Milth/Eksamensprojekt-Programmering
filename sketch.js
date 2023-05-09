@@ -1,6 +1,6 @@
-// knapper
-let button
-let button2
+// knapper til at vælge spil
+let button;
+let button2;
 
 // Variabler til Pong
 let Ly = 165;
@@ -44,11 +44,9 @@ function setup() {
 }
 
 function skjulKnapper() {
-  button.hide()
-  button2.hide()
+  button.hide();
+  button2.hide();
 }
-
-
 
 function draw() {
   if (spil === 0) {
@@ -60,7 +58,7 @@ function draw() {
   }
 
   if (spil === 2) {
-    background('grey');
+    background("grey");
 
     if (slange.Spise(mad)) {
       pickLocation();
@@ -69,13 +67,12 @@ function draw() {
     slange.Opdater();
     slange.show();
 
-
     fill(255, 0, 100);
     rect(mad.x, mad.y, Skalering, Skalering);
 
     textSize(32);
     fill(255);
-    textAlign(LEFT, TOP)
+    textAlign(LEFT, TOP);
     text("Din score er: " + slange.total, 0, 0);
   }
 }
@@ -90,15 +87,14 @@ function Start() {
   text("Spil: " + spil, width / 2, height / 2);
 }
 function skiftSpil_Pong() {
-  skjulKnapper()
+  skjulKnapper();
   spil = 1;
-
 }
 
 function skiftSpil_Snake() {
-  skjulKnapper()
+  skjulKnapper();
   slange = new Slange();
-  frameRate(((width / Skalering) / 2));
+  frameRate(width / Skalering / 2);
   pickLocation();
   spil = 2;
 }
@@ -188,7 +184,6 @@ function ballMove() {
 function Pong() {
   paddleMove();
 
-
   if (keyIsDown(32)) {
     go = true;
   }
@@ -235,7 +230,6 @@ function pickLocation() {
   var Rækker = floor(height / Skalering);
   mad = createVector(floor(random(Kolonner)), floor(random(Rækker)));
   mad.mult(Skalering);
-
 }
 
 function keyPressed() {
@@ -250,12 +244,9 @@ function keyPressed() {
       slange.retning(-1, 0);
     }
   }
-
 }
 
-
 class Slange {
-
   constructor() {
     this.x = 0;
     this.y = 0;
@@ -263,14 +254,14 @@ class Slange {
     this.yspeed = 0;
     this.total = 0;
     this.Hale = [];
-    this.score = 0
+    this.score = 0;
   }
 
   Spise(pos) {
     var d = dist(this.x, this.y, pos.x, pos.y);
     if (d < 1) {
       this.total++;
-      this.score = this.score + 1
+      this.score = this.score + 1;
       return true;
     } else {
       return false;
@@ -287,7 +278,7 @@ class Slange {
       var pos = this.Hale[i];
       var d = dist(this.x, this.y, pos.x, pos.y);
       if (d < 1) {
-        console.log('Prøv igen, din score var ' + this.total);
+        console.log("Prøv igen, din score var " + this.total);
         this.total = 0;
         this.Hale = [];
       }
@@ -310,12 +301,11 @@ class Slange {
   }
 
   show() {
-    fill('rgb(0,255,0)');
+    fill("rgb(0,255,0)");
     for (var i = 0; i < this.Hale.length; i++) {
       rect(this.Hale[i].x, this.Hale[i].y, Skalering, Skalering);
     }
     rect(this.x, this.y, Skalering, Skalering);
-
   }
   retning(x, y) {
     this.xspeed = x;
