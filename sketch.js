@@ -88,13 +88,14 @@ function Start() {
 }
 function skiftSpil_Pong() {
   skjulKnapper();
+  frameRate(60);
   spil = 1;
 }
 
 function skiftSpil_Snake() {
   skjulKnapper();
   slange = new Slange();
-  //frameRate(width / Skalering / 2);
+  frameRate(width / Skalering / 2);
   pickLocation();
   spil = 2;
 }
